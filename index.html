@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo 101: Formulario e Intérprete de Análisis de Funciones</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS for beautiful math equations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo">
+                    <i data-lucide="function-square"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Cálculo 101</h1>
+                    <span>Guía Interactiva</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <button class="nav-item active" data-tab="rules">
+                    <i data-lucide="book-open"></i>
+                    <span>El Acordeón</span>
+                </button>
+                <button class="nav-item" data-tab="steps">
+                    <i data-lucide="list-ordered"></i>
+                    <span>Paso a Paso</span>
+                </button>
+                <button class="nav-item" data-tab="analyzer">
+                    <i data-lucide="line-chart"></i>
+                    <span>Analizador</span>
+                </button>
+                <button class="nav-item" data-tab="quiz">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Entrenador</span>
+                </button>
+                <button class="nav-item" data-tab="tips">
+                    <i data-lucide="help-circle"></i>
+                    <span>Tips de Examen</span>
+                </button>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <p>Tercer Parcial</p>
+                <span>Cálculo Diferencial</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-info">
+                    <h2 id="page-title">Reglas de Derivación: El Acordeón</h2>
+                    <p id="page-subtitle">Domina las fórmulas fundamentales e interactúa con sus ejemplos.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary toggle-theme-btn" id="theme-toggle">
+                        <i data-lucide="sun" class="sun-icon"></i>
+                        <i data-lucide="moon" class="moon-icon"></i>
+                        <span>Tema</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Tab Content: Rules Dashboard -->
+            <section id="tab-rules" class="tab-panel active">
+                <div class="section-intro">
+                    <p>Para resolver con éxito, primero debemos dominar las reglas operativas. Recuerda que la clave está en identificar qué operación predomina en la función original.</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <!-- Formulas Section -->
+                    <div class="card main-rules-card">
+                        <div class="card-header">
+                            <i data-lucide="award"></i>
+                            <h3>Reglas Fundamentales</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="rules-table">
+                                <thead>
+                                    <tr>
+                                        <th>Regla</th>
+                                        <th>Mnemotecnia (Cómo recordarla)</th>
+                                        <th>Fórmula</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="rule-row" data-rule="product">
+                                        <td><strong>Producto</strong></td>
+                                        <td>La derivada de la primera por la segunda sin derivar, más la primera sin derivar por la derivada de la segunda.</td>
+                                        <td><div class="math-expr" data-expr="\frac{d}{dx}[u \cdot v] = u'v + uv'"></div></td>
+                                    </tr>
+                                    <tr class="rule-row" data-rule="quotient">
+                                        <td><strong>Cociente</strong></td>
+                                        <td>La derivada del de arriba por el de abajo, menos el de arriba por la derivada del de abajo, todo sobre el de abajo al cuadrado.</td>
+                                        <td><div class="math-expr" data-expr="\frac{d}{dx}\left[\frac{u}{v}\right] = \frac{u'v - uv'}{v^2}"></div></td>
+                                    </tr>
+                                    <tr class="rule-row" data-rule="chain">
+                                        <td><strong>Cadena</strong></td>
+                                        <td>La derivada de la función externa (la potencia) por la derivada de la función interna (lo de adentro).</td>
+                                        <td><div class="math-expr" data-expr="\frac{dy}{dx} = n \cdot u^{n-1} \cdot u'"></div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-terms-legend">
+                            <span><strong>Glosario rápido:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> primera función</span>
+                            <span class="legend-item" data-term="v"><span class="symbol">$v$</span> segunda función</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u', v'$</span> derivadas</span>
+                            <span class="legend-item" data-term="n"><span class="symbol">$n$</span> exponente</span>
+                            <span class="legend-item" data-term="d"><span class="symbol">$\frac{d}{dx}$</span> operador derivada</span>
+                        </div>
+                    </div>
+
+                    <!-- Transcendental Formulas Card -->
+                    <div class="card math-formulas-card">
+                        <div class="card-header">
+                            <i data-lucide="zap"></i>
+                            <h3>Funciones Trascendentales</h3>
+                        </div>
+                        <div class="trans-formulas-grid">
+                            <div class="formula-box">
+                                <h4>Trigonométricas (Seno)</h4>
+                                <div class="math-expr" data-expr="\frac{d}{dx}[a\,\text{sen}(u)] = a\cos(u) \cdot u'"></div>
+                                <span class="formula-tip">Conserva el coeficiente y multiplica por la derivada interna.</span>
+                            </div>
+                            <div class="formula-box">
+                                <h4>Trigonométricas (Coseno)</h4>
+                                <div class="math-expr" data-expr="\frac{d}{dx}[\cos(u)] = -\text{sen}(u) \cdot u'"></div>
+                                <span class="formula-tip">¡Cuidado con el signo negativo resultante!</span>
+                            </div>
+                            <div class="formula-box">
+                                <h4>Exponenciales (Base $e$)</h4>
+                                <div class="math-expr" data-expr="\frac{d}{dx}[e^u] = e^u \cdot u'"></div>
+                                <span class="formula-tip">Queda exactamente igual y se multiplica por la derivada del exponente.</span>
+                            </div>
+                            <div class="formula-box">
+                                <h4>Exponenciales (Base 10)</h4>
+                                <div class="math-expr" data-expr="\frac{d}{dx}[10^u] = 10^u \cdot \ln(10) \cdot u'"></div>
+                                <span class="formula-tip">Se agrega el logaritmo natural de la base.</span>
+                            </div>
+                            <div class="formula-box full-width">
+                                <h4>Logaritmo Común ($\log_{10}$)</h4>
+                                <div class="math-expr" data-expr="\frac{d}{dx}[\log_{10}(u)] = \frac{u'}{u \cdot \ln(10)}"></div>
+                                <span class="formula-tip">La derivada interna dividida entre la función por el logaritmo natural de 10.</span>
+                            </div>
+                        </div>
+                        <div class="card-terms-legend">
+                            <span><strong>Glosario rápido:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> argumento interno</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u'$</span> derivada de $u$</span>
+                            <span class="legend-item" data-term="a"><span class="symbol">$a$</span> coeficiente constante</span>
+                            <span class="legend-item" data-term="d"><span class="symbol">$\frac{d}{dx}$</span> operador derivada</span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Practice Panel -->
+                    <div class="card interactive-calculator-card">
+                        <div class="card-header">
+                            <i data-lucide="sliders"></i>
+                            <h3>Laboratorio de Reglas</h3>
+                        </div>
+                        <div class="calc-tabs">
+                            <button class="calc-tab active" data-calc="product-quotient">Producto / Cociente</button>
+                            <button class="calc-tab" data-calc="chain-root">Cadena / Raíces</button>
+                            <button class="calc-tab" data-calc="trig-exp">Trascendentales</button>
+                        </div>
+                        
+                        <!-- Calculator View: Product/Quotient -->
+                        <div class="calc-view active" id="calc-product-quotient">
+                            <p class="calc-description">Introduce expresiones sencillas para $u$ y $v$ junto con sus derivadas para visualizar cómo se ensamblan las reglas.</p>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="calc-u">Función $u(x)$</label>
+                                    <input type="text" id="calc-u" value="x^2 - 3">
+                                    <div class="input-math-preview" id="calc-u-preview"></div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="calc-u-prime">Derivada $u'(x)$</label>
+                                    <input type="text" id="calc-u-prime" value="2x">
+                                    <div class="input-math-preview" id="calc-u-prime-preview"></div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="calc-v">Función $v(x)$</label>
+                                    <input type="text" id="calc-v" value="5x + 4">
+                                    <div class="input-math-preview" id="calc-v-preview"></div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="calc-v-prime">Derivada $v'(x)$</label>
+                                    <input type="text" id="calc-v-prime" value="5">
+                                    <div class="input-math-preview" id="calc-v-prime-preview"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="calc-results">
+                                <div class="result-block">
+                                    <h5>Ensamble del Producto:</h5>
+                                    <div class="formula-result math-display" id="product-result-math"></div>
+                                    <span class="math-explanation">Fórmula: $(u' \cdot v) + (u \cdot v')$</span>
+                                </div>
+                                <div class="result-block">
+                                    <h5>Ensamble del Cociente:</h5>
+                                    <div class="formula-result math-display" id="quotient-result-math"></div>
+                                    <span class="math-explanation">Fórmula: $\frac{(u' \cdot v) - (u \cdot v')}{v^2}$</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calculator View: Chain/Root -->
+                        <div class="calc-view" id="calc-chain-root">
+                            <p class="calc-description">Prueba la conversión rápida de raíces a exponentes fraccionarios y su derivación por la regla de la cadena.</p>
+                            <div class="root-converter-container">
+                                <h5>Convertidor de Raíces $\sqrt[n]{(x-a)^m} \rightarrow (x-a)^{m/n}$</h5>
+                                <div class="root-input-row">
+                                    <div class="input-group small">
+                                        <label for="root-index">Índice $n$</label>
+                                        <input type="number" id="root-index" value="4" min="2" max="10">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="root-base">Base $(x-a)$</label>
+                                        <input type="text" id="root-base" value="x - 4">
+                                    </div>
+                                    <div class="input-group small">
+                                        <label for="root-power">Potencia $m$</label>
+                                        <input type="number" id="root-power" value="3" min="1" max="10">
+                                    </div>
+                                </div>
+                                
+                                <div class="root-output">
+                                    <div class="step-badge">Paso 1: Exponente Fraccionario</div>
+                                    <div class="math-display" id="root-frac-math"></div>
+                                    
+                                    <div class="step-badge">Paso 2: Aplicando Cadena</div>
+                                    <div class="math-display" id="root-chain-math"></div>
+                                    <div class="math-explanation" id="root-explanation-text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calculator View: Trig / Exp -->
+                        <div class="calc-view" id="calc-trig-exp">
+                            <p class="calc-description">Visualiza la aplicación de la derivada interna $u'$ en funciones trigonométricas y exponenciales.</p>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label for="trig-u">Exponente o Argumento $u(x)$</label>
+                                    <input type="text" id="trig-u" value="5x^2">
+                                    <div class="input-math-preview" id="trig-u-preview"></div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="trig-u-prime">Derivada interna $u'(x)$</label>
+                                    <input type="text" id="trig-u-prime" value="10x">
+                                    <div class="input-math-preview" id="trig-u-prime-preview"></div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="trig-coef">Coeficiente $a$ (para Seno)</label>
+                                    <input type="number" id="trig-coef" value="3">
+                                </div>
+                            </div>
+                            
+                            <div class="calc-results">
+                                <div class="result-block">
+                                    <h5>Derivada de $3\text{sen}(5x^2)$ o $3\cos(5x^2)$:</h5>
+                                    <div class="formula-result math-display" id="trig-sen-math"></div>
+                                </div>
+                                <div class="result-block">
+                                    <h5>Derivada de $e^{5x^2}$ o $10^{5x^2}$:</h5>
+                                    <div class="formula-result math-display" id="trig-exp-math"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-terms-legend">
+                            <span><strong>Glosario rápido:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> función $u(x)$</span>
+                            <span class="legend-item" data-term="v"><span class="symbol">$v$</span> función $v(x)$</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u', v'$</span> derivadas</span>
+                            <span class="legend-item" data-term="n"><span class="symbol">$n$</span> exponente / raíz</span>
+                            <span class="legend-item" data-term="a"><span class="symbol">$a$</span> coeficiente constante</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab Content: Step-by-Step Guide -->
+            <section id="tab-steps" class="tab-panel">
+                <div class="section-intro">
+                    <p>Sigue esta guía detallada basada en tus apuntes y ejercicios de evaluación para aprender a derivar cualquier tipo de función de forma lógica y estructurada.</p>
+                </div>
+                
+                <div class="steps-guide-container">
+                    <!-- Paso 0 -->
+                    <div class="card step-guide-card">
+                        <div class="step-guide-header">
+                            <div class="step-num">Paso 0</div>
+                            <h3>La Regla Maestra (Regla de la Potencia)</h3>
+                        </div>
+                        <p class="step-guide-text">Antes de usar fórmulas complejas, debes saber derivar términos simples. La regla es: <strong>Baja el exponente a multiplicar y réstale 1 al exponente.</strong></p>
+                        <ul class="step-guide-list">
+                            <li><strong>Si tienes $x^n$</strong>, la derivada es $n x^{n-1}$.</li>
+                            <li><strong>Si tienes un número con una $x$ sin exponente visible (ej. $6x$)</strong>, la derivada es solo el número ($6$).</li>
+                            <li><strong>Si tienes un número solo (una constante, ej. $8$)</strong>, su derivada es <strong>CERO</strong> ($0$).</li>
+                        </ul>
+                        
+                        <div class="step-guide-example">
+                            <h5>Ejemplo aplicándolo a tu sección de gráficas:</h5>
+                            <p>Para la función $f(x) = x^2 + 6x + 8$:</p>
+                            <ol>
+                                <li>La derivada de $x^2$ es $2x$ (bajas el 2 y queda exponente 1).</li>
+                                <li>La derivada de $6x$ es $6$.</li>
+                                <li>La derivada de $8$ es $0$.</li>
+                            </ol>
+                            <div class="quick-result-box">
+                                <strong>Tu derivada rápida es:</strong> $f'(x) = 2x + 6$
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 1 -->
+                    <div class="card step-guide-card">
+                        <div class="step-guide-header">
+                            <div class="step-num">Paso 1</div>
+                            <h3>Cuando te piden "Producto de Funciones"</h3>
+                        </div>
+                        <p class="step-guide-text">Tu actividad pide explícitamente usar esta regla cuando dos bloques con $x$ se están multiplicando, como en $f(x) = (x^4 - 3x^2 + 2x)(x^3 - 2x + 3)$.</p>
+                        
+                        <div class="trick-box">
+                            <h5>El truco para no equivocarte:</h5>
+                            <ol>
+                                <li>Llama al primer paréntesis <strong>$u$</strong> y al segundo <strong>$v$</strong>.</li>
+                                <li>Saca la derivada de cada uno por separado usando la Regla Maestra (Paso 0).
+                                    <ul>
+                                        <li>$u = x^4 - 3x^2 + 2x \longrightarrow u' = 4x^3 - 6x + 2$</li>
+                                        <li>$v = x^3 - 2x + 3 \longrightarrow v' = 3x^2 - 2$</li>
+                                    </ul>
+                                </li>
+                                <li>Únelos con la fórmula de la cruz: <strong>$(u' \cdot v) + (u \cdot v')$</strong>.
+                                    <div class="explanation-note">Es decir: <em>(La derivada del primero $\times$ el segundo normal) + (El primero normal $\times$ la derivada del segundo)</em>. Solo sustituye los bloques y listo.</div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="card-terms-legend">
+                            <span><strong>Términos:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> primer paréntesis</span>
+                            <span class="legend-item" data-term="v"><span class="symbol">$v$</span> segundo paréntesis</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u', v'$</span> derivadas</span>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2 -->
+                    <div class="card step-guide-card">
+                        <div class="step-guide-header">
+                            <div class="step-num">Paso 2</div>
+                            <h3>Cuando te piden "Cociente de Funciones" (Divisiones)</h3>
+                        </div>
+                        <p class="step-guide-text">Aplica cuando tienes fracciones como $f(x) = \frac{2x - 3}{x + 4}$.</p>
+                        
+                        <div class="trick-box">
+                            <h5>El truco:</h5>
+                            <ol>
+                                <li>Llama <strong>$u$</strong> al de arriba y <strong>$v$</strong> al de abajo.</li>
+                                <li>Deriva cada uno por separado (Regla Maestra).
+                                    <ul>
+                                        <li>$u = 2x - 3 \longrightarrow u' = 2$</li>
+                                        <li>$v = x + 4 \longrightarrow v' = 1$</li>
+                                    </ul>
+                                </li>
+                                <li>Aplica la fórmula: <strong>$\frac{(u' \cdot v) - (u \cdot v')}{v^2}$</strong>.
+                                    <div class="explanation-note"><strong>Nota vital:</strong> ¡Aquí el signo es <strong>MENOS</strong>! Multiplica cruzado empezando por la derivada del de arriba, réstale la otra multiplicación, y divide todo entre el denominador al cuadrado.</div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="card-terms-legend">
+                            <span><strong>Términos:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> numerador (arriba)</span>
+                            <span class="legend-item" data-term="v"><span class="symbol">$v$</span> denominador (abajo)</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u', v'$</span> derivadas</span>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3 -->
+                    <div class="card step-guide-card">
+                        <div class="step-guide-header">
+                            <div class="step-num">Paso 3</div>
+                            <h3>Cuando te piden "Regla de la Cadena"</h3>
+                        </div>
+                        <p class="step-guide-text">Esta regla es como "pelar una cebolla": <strong>derivas de afuera hacia adentro</strong>. Se usa cuando tienes un paréntesis grande elevado a una potencia, como $y = (5x^2 - 3)^2$.</p>
+                        
+                        <div class="trick-box">
+                            <h5>El método rápido:</h5>
+                            <ol>
+                                <li><strong>Lo de afuera:</strong> Baja el exponente principal, deja el paréntesis <strong>intacto</strong> y réstale 1 al exponente principal. (Para el ejemplo: $2(5x^2 - 3)^1$).</li>
+                                <li><strong>Lo de adentro:</strong> Ahora saca la derivada <em>solo</em> de lo que está dentro del paréntesis (Para el ejemplo: la derivada de $5x^2 - 3$ es $10x$).</li>
+                                <li><strong>Multiplica:</strong> Junta ambas partes $\longrightarrow 2(5x^2 - 3) \cdot (10x)$. Puedes multiplicar el $2$ por el $10x$ para simplificar a $20x(5x^2 - 3)$.</li>
+                            </ol>
+                            <div class="explanation-note">
+                                <strong>Ojo:</strong> Si tienes una raíz como $y = \sqrt{(x - 4)^3}$, primero conviértela a exponente fraccionario: $(x - 4)^{3/2}$. Luego, aplica la misma regla de la cebolla.
+                            </div>
+                        </div>
+                        <div class="card-terms-legend">
+                            <span><strong>Términos:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> base (lo de adentro)</span>
+                            <span class="legend-item" data-term="n"><span class="symbol">$n$</span> exponente de potencia</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u'$</span> derivada interna</span>
+                        </div>
+                    </div>
+
+                    <!-- Paso 4 -->
+                    <div class="card step-guide-card">
+                        <div class="step-guide-header">
+                            <div class="step-num">Paso 4</div>
+                            <h3>Las Especiales (Trigonométricas, Exponenciales)</h3>
+                        </div>
+                        <p class="step-guide-text">Estas tienen fórmulas directas que debes memorizar:</p>
+                        <ul class="step-guide-list">
+                            <li><strong>Seno:</strong> La derivada de $\text{sen}(U)$ es $\cos(U) \cdot U'$.
+                                <div class="explanation-note"><em>Ejemplo:</em> $f(x) = \text{sen}(4x^2)$. La derivada es $\cos(4x^2)$ multiplicado por la derivada de $4x^2$ (que es $8x$). Resultado: $8x \cdot \cos(4x^2)$.</div>
+                            </li>
+                            <li><strong>Exponencial $e$:</strong> La derivada de $e^U$ es $e^U \cdot U'$ (Queda igual, solo multiplicas por la derivada del exponente).
+                                <div class="explanation-note"><em>Ejemplo:</em> $f(x) = e^{2x}$. Derivada de $2x$ es $2$. Resultado: $2e^{2x}$.</div>
+                            </li>
+                        </ul>
+                        <div class="card-terms-legend">
+                            <span><strong>Términos:</strong></span>
+                            <span class="legend-item" data-term="u"><span class="symbol">$u$</span> exponente o argumento</span>
+                            <span class="legend-item" data-term="prime"><span class="symbol">$u'$</span> derivada interna ($U'$)</span>
+                            <span class="legend-item" data-term="d"><span class="symbol">$\frac{d}{dx}$</span> operador derivada</span>
+                        </div>
+                    </div>
+
+                    <!-- Paso 5 -->
+                    <div class="card step-guide-card">
+                        <div class="step-guide-header">
+                            <div class="step-num">Paso 5</div>
+                            <h3>Análisis y Gráficas (El camino al 10)</h3>
+                        </div>
+                        <p class="step-guide-text">Para las funciones largas como $f(x) = x^3 - 3x$, este es el algoritmo exacto:</p>
+                        <ol class="step-guide-list" style="list-style-type: decimal; margin-left: 1.5rem;">
+                            <li><strong>Puntos Críticos:</strong> Saca la primera derivada ($3x^2 - 3$) e iguálala a $0$ ($3x^2 - 3 = 0$). Despeja la $x$. Esos valores son tus puntos críticos.</li>
+                            <li><strong>Saber si es Máximo o Mínimo:</strong> Saca la <strong>segunda derivada</strong> (deriva tu primera derivada, que en este caso sería $6x$). Sustituye los valores de $x$ del Paso 1 aquí.
+                                <ul>
+                                    <li>¿El resultado dio positivo? Es un <strong>Mínimo</strong>.</li>
+                                    <li>¿Dio negativo? Es un <strong>Máximo</strong>.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Coordenadas exactas:</strong> Toma los valores de $x$ del Paso 1, y mételos en la <strong>función original</strong> ($x^3 - 3x$) para descubrir cuánto vale $y$. Ya tienes los puntos $(x, y)$ para poner en la gráfica.</li>
+                            <li><strong>Inflexión (Cóncava/Convexa):</strong> Iguala tu segunda derivada a $0$ (ej. $6x = 0$, por lo que $x = 0$). Ese es tu punto donde la curva cambia de forma.</li>
+                            <li><strong>Tabular y Graficar:</strong> Dale a $x$ valores (ej. -3, -2, -1, 0, 1, 2, 3), sustitúyelos en la <strong>función original</strong> para sacar $y$, pon los puntos en el plano cartesiano y dibuja la curva asegurándote de que tus máximos y mínimos cuadren.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Content: Function Analyzer -->
+            <section id="tab-analyzer" class="tab-panel">
+                <div class="section-intro">
+                    <p>Selecciona uno de los casos de estudio asignados en la guía de evaluación o personaliza los coeficientes de tu propia función polinomial para analizarla de forma interactiva.</p>
+                </div>
+
+                <div class="analyzer-layout">
+                    <!-- Controls Sidebar -->
+                    <div class="analyzer-controls-panel">
+                        <div class="card">
+                            <div class="card-header">
+                                <i data-lucide="edit-3"></i>
+                                <h3>Selección de Modelo</h3>
+                            </div>
+                            
+                            <!-- Presets -->
+                            <div class="preset-buttons">
+                                <button class="btn btn-preset active" data-preset="quadratic">
+                                    <strong>Caso A: Cuadrática</strong>
+                                    <span>$f(x) = x^2 + 6x + 8$</span>
+                                </button>
+                                <button class="btn btn-preset" data-preset="cubic">
+                                    <strong>Caso B: Cúbica</strong>
+                                    <span>$f(x) = x^3 - 3x$</span>
+                                </button>
+                                <button class="btn btn-preset" data-preset="quartic">
+                                    <strong>Caso C: 4to Grado</strong>
+                                    <span>$f(x) = x^4 - 6x^2 + 8$</span>
+                                </button>
+                                <button class="btn btn-preset" data-preset="custom">
+                                    <strong>Personalizar Función</strong>
+                                    <span>$Ax^4 + Bx^3 + Cx^2 + Dx + E$</span>
+                                </button>
+                            </div>
+
+                            <!-- Custom Coefficients Form (Hidden by default) -->
+                            <div class="custom-coefficients-container" id="custom-coefs" style="display: none;">
+                                <h4>Ajustar Coeficientes</h4>
+                                <div class="coef-row-list">
+                                    <div class="coef-input-item">
+                                        <label for="coef-A">Coeficiente $A$ ($x^4$)</label>
+                                        <input type="number" id="coef-A" value="0" step="0.5">
+                                    </div>
+                                    <div class="coef-input-item">
+                                        <label for="coef-B">Coeficiente $B$ ($x^3$)</label>
+                                        <input type="number" id="coef-B" value="0" step="0.5">
+                                    </div>
+                                    <div class="coef-input-item">
+                                        <label for="coef-C">Coeficiente $C$ ($x^2$)</label>
+                                        <input type="number" id="coef-C" value="1" step="0.5">
+                                    </div>
+                                    <div class="coef-input-item">
+                                        <label for="coef-D">Coeficiente $D$ ($x$)</label>
+                                        <input type="number" id="coef-D" value="6" step="0.5">
+                                    </div>
+                                    <div class="coef-input-item">
+                                        <label for="coef-E">Constante $E$</label>
+                                        <input type="number" id="coef-E" value="8" step="0.5">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-block" style="margin-top: 1rem;" id="apply-custom-btn">Analizar Personalizada</button>
+                            </div>
+                            
+                            <!-- Current Function Display -->
+                            <div class="current-function-display">
+                                <span>Función bajo análisis:</span>
+                                <div class="math-display" id="analyzer-curr-func"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Steps Output & Graphical Representation -->
+                    <div class="analyzer-output-panel">
+                        <!-- Navigation Tabs for Steps -->
+                        <div class="step-nav-bar">
+                            <button class="step-nav-tab active" data-step="0">Paso 0: Regla Maestra</button>
+                            <button class="step-nav-tab" data-step="1">Paso 1: Derivadas</button>
+                            <button class="step-nav-tab" data-step="2">Paso 2: Críticos</button>
+                            <button class="step-nav-tab" data-step="3">Paso 3: Máx/Mín</button>
+                            <button class="step-nav-tab" data-step="4">Paso 4: Concavidad</button>
+                            <button class="step-nav-tab" data-step="5">Paso 5: Tabulación</button>
+                            <button class="step-nav-tab" data-step="6">Paso 6: Gráfica</button>
+                        </div>
+
+                        <!-- Step 0: Power Rule (Master Rule) -->
+                        <div class="step-content card active" id="analyzer-step-0">
+                            <h3>Paso 0: La Regla Maestra (Regla de la Potencia)</h3>
+                            <p class="step-intro">Antes de adentrarnos en análisis complejos, debemos dominar la derivación de términos individuales. <strong>"Baja el exponente a multiplicar y réstale 1 al exponente original".</strong></p>
+                            
+                            <div class="rules-summary-boxes">
+                                <div class="rule-summary-box">
+                                    <div class="badge">Término General</div>
+                                    <div class="math-display">$x^n \longrightarrow n x^{n-1}$</div>
+                                </div>
+                                <div class="rule-summary-box">
+                                    <div class="badge">Término Lineal</div>
+                                    <div class="math-display">$c x \longrightarrow c$</div>
+                                </div>
+                                <div class="rule-summary-box">
+                                    <div class="badge">Constante</div>
+                                    <div class="math-display">$c \longrightarrow 0$</div>
+                                </div>
+                            </div>
+
+                            <div class="interactive-breakdown">
+                                <h4>Desglose términal de la función actual:</h4>
+                                <div id="power-rule-breakdown-container">
+                                    <!-- Dynamic content -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 1: Derivative Functions -->
+                        <div class="step-content card" id="analyzer-step-1">
+                            <h3>Paso 1: Primera y Segunda Derivada</h3>
+                            <p class="step-intro">Calculamos $f'(x)$ y $f''(x)$. La primera derivada nos dice la pendiente instantánea; si es positiva, la función crece; si es negativa, decrece. La segunda derivada indica cómo cambia la pendiente (concavidad).</p>
+                            
+                            <div class="derivs-container">
+                                <div class="deriv-box">
+                                    <h4>Función Original $f(x)$</h4>
+                                    <div class="math-display" id="step1-f"></div>
+                                </div>
+                                <div class="deriv-box highlight">
+                                    <h4>Primera Derivada $f'(x)$</h4>
+                                    <div class="math-display" id="step1-df"></div>
+                                    <span class="box-note">Representa la pendiente de la recta tangente.</span>
+                                </div>
+                                <div class="deriv-box">
+                                    <h4>Segunda Derivada $f''(x)$</h4>
+                                    <div class="math-display" id="step1-ddf"></div>
+                                    <span class="box-note">Representa la aceleración o concavidad.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="conceptual-card warning">
+                                <h5>Explicación Intuitiva</h5>
+                                <p>Imagina que estás caminando sobre la gráfica de izquierda a derecha. Si vas subiendo una cuesta, $f'(x)$ es positiva. Si estás en la cima o en el fondo de un valle, la superficie es plana por un instante, lo que significa que $f'(x) = 0$. Esto nos lleva al siguiente paso.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Critical Points -->
+                        <div class="step-content card" id="analyzer-step-2">
+                            <h3>Paso 2: Cálculo de Puntos Críticos</h3>
+                            <p class="step-intro">Igualamos la primera derivada a cero ($f'(x) = 0$) y resolvemos para $x$. Estos valores representan las posiciones donde la gráfica se nivela horizontalmente y puede cambiar de dirección.</p>
+                            
+                            <div class="equation-solver-box">
+                                <div class="solver-header">Resolver la Ecuación:</div>
+                                <div class="math-display" id="step2-equation"></div>
+                                
+                                <div class="solver-steps" id="step2-algebra-steps">
+                                    <!-- Dynamic Algebraic Steps -->
+                                </div>
+                            </div>
+
+                            <div class="critical-points-results">
+                                <h4>Puntos Críticos Encontrados:</h4>
+                                <div class="badges-row" id="step2-critical-badges">
+                                    <!-- Dynamic badges -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Maxima and Minima -->
+                        <div class="step-content card" id="analyzer-step-3">
+                            <h3>Paso 3: Determinación de Máximos y Mínimos</h3>
+                            <p class="step-intro">Aplicamos el <strong>Criterio de la Segunda Derivada</strong> sobre los puntos críticos. Sustituimos los valores de $x$ críticos en $f''(x)$:</p>
+                            
+                            <div class="criteria-diagram">
+                                <div class="criteria-card min">
+                                    <i data-lucide="chevrons-up"></i>
+                                    <h5>Si $f''(x) > 0$</h5>
+                                    <strong>MÍNIMO LOCAL</strong>
+                                    <span>La curva se abre hacia arriba (cóncava).</span>
+                                </div>
+                                <div class="criteria-card max">
+                                    <i data-lucide="chevrons-down"></i>
+                                    <h5>Si $f''(x) < 0$</h5>
+                                    <strong>MÁXIMO LOCAL</strong>
+                                    <span>La curva se abre hacia abajo (convexa).</span>
+                                </div>
+                            </div>
+
+                            <div class="evaluation-table-container">
+                                <h4>Evaluación en la Segunda Derivada y Coordenadas $(x,y)$:</h4>
+                                <table class="evaluation-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Punto Crítico $x_c$</th>
+                                            <th>Evaluación $f''(x_c)$</th>
+                                            <th>Resultado del Criterio</th>
+                                            <th>Coordenada $y_c = f(x_c)$</th>
+                                            <th>Punto en el Plano $(x_c, y_c)$</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="step3-evaluation-tbody">
+                                        <!-- Dynamic evaluation table rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Concavity and Inflection Points -->
+                        <div class="step-content card" id="analyzer-step-4">
+                            <h3>Paso 4: Análisis de Concavidad e Inflexión</h3>
+                            <p class="step-intro">El punto de inflexión es donde la función cambia su dirección de curvatura (de cóncava a convexa o viceversa). Se obtiene igualando la segunda derivada a cero ($f''(x) = 0$).</p>
+                            
+                            <div class="equation-solver-box">
+                                <div class="solver-header">Resolver la Ecuación de Concavidad:</div>
+                                <div class="math-display" id="step4-equation"></div>
+                                <div class="solver-steps" id="step4-algebra-steps">
+                                    <!-- Dynamic steps -->
+                                </div>
+                            </div>
+
+                            <div class="inflection-points-container">
+                                <h4>Punto(s) de Inflexión Encontrados:</h4>
+                                <div class="badges-row" id="step4-inflection-badges">
+                                    <!-- Dynamic badges -->
+                                </div>
+                            </div>
+
+                            <div class="intervals-container">
+                                <h4>Intervalos de Crecimiento/Decrecimiento y Concavidad:</h4>
+                                <div class="intervals-grid" id="step4-intervals-grid">
+                                    <!-- Dynamic intervals cards -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Values Table -->
+                        <div class="step-content card" id="analyzer-step-5">
+                            <h3>Paso 5: Tabulación</h3>
+                            <p class="step-intro">Es indispensable tabular la función para dibujarla correctamente. Esta tabla muestra una serie de valores coordenados, incluyendo de manera obligatoria los puntos críticos, puntos de inflexión y valores aledaños.</p>
+                            
+                            <div class="table-controls">
+                                <div class="input-group inline">
+                                    <label for="table-range-min">Rango Min $x$</label>
+                                    <input type="number" id="table-range-min" value="-5" min="-12" max="12">
+                                </div>
+                                <div class="input-group inline">
+                                    <label for="table-range-max">Rango Max $x$</label>
+                                    <input type="number" id="table-range-max" value="5" min="-12" max="12">
+                                </div>
+                                <div class="input-group inline">
+                                    <label for="table-step">Paso $\Delta x$</label>
+                                    <input type="number" id="table-step" value="1" min="0.1" max="5" step="0.1">
+                                </div>
+                                <button class="btn btn-secondary" id="generate-table-btn">Regenerar Tabla</button>
+                            </div>
+
+                            <div class="table-scroll-container">
+                                <table class="values-table" id="analyzer-values-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Valor de $x$</th>
+                                            <th>Sustitución en la Función $f(x)$</th>
+                                            <th>Coordenada $y = f(x)$</th>
+                                            <th>Pendiente $f'(x)$</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-values-tbody">
+                                        <!-- Dynamic table rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Interactive Plotting -->
+                        <div class="step-content card" id="analyzer-step-6">
+                            <h3>Paso 6: Graficación</h3>
+                            <p class="step-intro">La representación gráfica integra toda la información anterior. La cuadrícula cubre el formato de examen en un plano de rango $[-12, 12]$ (o escalado automáticamente) con marcas claras de máximos y mínimos.</p>
+                            
+                            <div class="chart-wrapper">
+                                <div class="chart-container">
+                                    <canvas id="function-canvas"></canvas>
+                                </div>
+                                <div class="chart-legend-card">
+                                    <h4>Elementos de la Gráfica</h4>
+                                    <ul class="legend-list">
+                                        <li><span class="legend-dot func-line"></span> Curva $f(x)$</li>
+                                        <li><span class="legend-dot max-point"></span> Máximo Local</li>
+                                        <li><span class="legend-dot min-point"></span> Mínimo Local</li>
+                                        <li><span class="legend-dot infl-point"></span> Punto de Inflexión</li>
+                                    </ul>
+                                    <div class="interactive-inspector">
+                                        <h5>Inspector de Pendientes</h5>
+                                        <p>Mueve el cursor sobre la gráfica para inspeccionar la recta tangente y su pendiente en tiempo real.</p>
+                                        <div class="inspector-values">
+                                            <div class="ins-val"><span>$x$: </span><strong id="ins-x">-</strong></div>
+                                            <div class="ins-val"><span>$y$: </span><strong id="ins-y">-</strong></div>
+                                            <div class="ins-val"><span>$f'(x)$ (Pendiente): </span><strong id="ins-slope">-</strong></div>
+                                            <div class="ins-val"><span>Comportamiento: </span><strong id="ins-desc">-</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Content: Quiz & Practice -->
+            <section id="tab-quiz" class="tab-panel">
+                <div class="section-intro">
+                    <p>¡Ponte a prueba antes del examen! Resuelve preguntas dinámicas basadas en los contenidos y trucos matemáticos de la guía. Trata de obtener un 10 perfecto.</p>
+                </div>
+
+                <div class="quiz-container card">
+                    <div class="quiz-header" id="quiz-header" style="display: none;">
+                        <div class="quiz-progress-container">
+                            <span class="quiz-progress-text">Pregunta <span id="quiz-curr-q">1</span> de <span id="quiz-total-q">5</span></span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="quiz-progress-bar" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                        <div class="quiz-score-badge">
+                            Puntaje: <span id="quiz-score">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Setup Screen (Visible initially) -->
+                    <div class="quiz-setup-block" id="quiz-setup">
+                        <div class="setup-icon-container">
+                            <i data-lucide="brain-circuit" class="setup-icon" style="width: 40px; height: 40px; color: var(--color-primary);"></i>
+                        </div>
+                        <h3>Configura tu Entrenamiento</h3>
+                        <p class="setup-desc">Selecciona la dificultad y el número de preguntas para ponerte a prueba antes del examen:</p>
+                        
+                        <div class="difficulty-options">
+                            <button class="btn btn-diff active" data-questions="5">
+                                <span class="diff-title">Rápido (Básico)</span>
+                                <span class="diff-desc">5 preguntas rápidas para repasar reglas clave y mnemotecnias</span>
+                            </button>
+                            <button class="btn btn-diff" data-questions="15">
+                                <span class="diff-title">Completo (Intermedio)</span>
+                                <span class="diff-desc">15 preguntas que abarcan todos los temas con análisis gráfico y cálculo intermedio</span>
+                            </button>
+                            <button class="btn btn-diff" data-questions="30">
+                                <span class="diff-title">Simulacro (Examen)</span>
+                                <span class="diff-desc">30 preguntas. El temario completo de forma exhaustiva, incluyendo análisis de curvas complejas</span>
+                            </button>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block" id="quiz-start-btn" style="margin-top: 1rem;">Comenzar Simulación</button>
+                    </div>
+
+                    <!-- Question Block (Hidden initially) -->
+                    <div class="question-block" id="question-block" style="display: none;">
+                        <h4 class="question-text" id="question-text">¿Cuál es la derivada de $3\text{sen}(5x)$?</h4>
+                        
+                        <!-- Quiz Graph Wrapper -->
+                        <div class="quiz-graph-wrapper" id="quiz-chart-container" style="display: none; margin: 1.25rem auto; width: 100%; max-width: 450px; height: 200px; position: relative;">
+                            <canvas id="quiz-chart-canvas"></canvas>
+                        </div>
+                        
+                        <div class="options-container" id="options-container">
+                            <!-- Options will be rendered dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-actions" id="quiz-actions" style="display: none;">
+                        <div class="explanation-box" id="quiz-explanation" style="display: none;">
+                            <h5>Explicación:</h5>
+                            <p id="quiz-explanation-text"></p>
+                        </div>
+                        <button class="btn btn-primary" id="quiz-next-btn" style="display: none;">Siguiente Pregunta</button>
+                    </div>
+
+                    <!-- Quiz Finished Block (Hidden) -->
+                    <div class="quiz-finished-block" id="quiz-finished" style="display: none;">
+                        <i data-lucide="trophy" class="trophy-icon"></i>
+                        <h3>¡Simulación Completada!</h3>
+                        <p class="final-score-text">Tu calificación final es: <strong id="final-grade">10/10</strong></p>
+                        <p class="evaluation-verdict" id="final-verdict">¡Excelente trabajo! Estás listo para el examen de cálculo.</p>
+                        <button class="btn btn-primary" id="quiz-restart-btn">Intentar de Nuevo</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Content: Exam Tips -->
+            <section id="tab-tips" class="tab-panel">
+                <div class="section-intro">
+                    <p>Estos son los consejos estratégicos y errores comunes recopilados directamente de las evaluaciones de semestres anteriores. Estúdialos detenidamente.</p>
+                </div>
+
+                <div class="tips-grid">
+                    <div class="tip-card card warning-card">
+                        <div class="tip-icon-header">
+                            <i data-lucide="alert-triangle"></i>
+                            <h3>1. Cuidado con el Signo Menos (Cociente)</h3>
+                        </div>
+                        <p>En la regla del cociente, la fórmula contiene un signo negativo antes de $u \cdot v'$. Este signo afecta a <strong>todo</strong> el resultado de esa multiplicación.</p>
+                        <div class="tip-example">
+                            <div class="math-expr" data-expr="-(u \cdot v') \implies \text{El signo cambia TODO dentro del bloque.}"></div>
+                            <span class="recommendation"><strong>Consejo:</strong> Escribe siempre un paréntesis grande después del signo menos para resolver la multiplicación interna primero y luego distribuir el negativo.</span>
+                        </div>
+                    </div>
+
+                    <div class="tip-card card warning-card">
+                        <div class="tip-icon-header">
+                            <i data-lucide="check-square"></i>
+                            <h3>2. La "Derivada Interna" (Cadena)</h3>
+                        </div>
+                        <p>En la regla de la cadena, nunca olvides multiplicar por la derivada de lo que está dentro del paréntesis (la función interna $u'$).</p>
+                        <div class="tip-example">
+                            <p>Ejemplo: Si $y = (6x - 2)^5$, la derivada es:</p>
+                            <div class="math-expr" data-expr="y' = 5(6x - 2)^4 \cdot (6) = 30(6x - 2)^4"></div>
+                            <span class="recommendation">¡El $(6)$ es la derivada interna de $(6x-2)$! Sin él, tu respuesta será incorrecta.</span>
+                        </div>
+                    </div>
+
+                    <div class="tip-card card info-card">
+                        <div class="tip-icon-header">
+                            <i data-lucide="percent"></i>
+                            <h3>3. Transformación de Raíces</h3>
+                        </div>
+                        <p>Si te encuentras con una raíz en el examen, no intentes derivarla en su formato original. Primero reescríbela usando un exponente fraccionario.</p>
+                        <div class="tip-example">
+                            <div class="math-expr" data-expr="\sqrt[q]{x^p} = x^{\frac{p}{q}} \quad \text{y} \quad \sqrt[4]{(x-4)^3} = (x-4)^{\frac{3}{4}}"></div>
+                            <span class="recommendation">Al transformarla a exponente fraccionario, puedes derivar aplicando la regla de la cadena convencional (bajar exponente y restar 1).</span>
+                        </div>
+                    </div>
+
+                    <div class="tip-card card info-card">
+                        <div class="tip-icon-header">
+                            <i data-lucide="combine"></i>
+                            <h3>4. Coherencia Gráfica</h3>
+                        </div>
+                        <p>La derivada, la tabla de valores y la gráfica <strong>siempre deben contar la misma historia</strong>. Este es tu mejor método de auto-corrección en el examen.</p>
+                        <div class="tip-example">
+                            <ul>
+                                <li>Si $f'(x) > 0$ en un intervalo, la gráfica debe ir <strong>hacia arriba</strong> (creciente) en ese tramo.</li>
+                                <li>Si $f'(x) < 0$, la gráfica debe ir <strong>hacia abajo</strong> (decreciente).</li>
+                                <li>Los puntos críticos ($f'(x) = 0$) deben coincidir exactamente con las crestas (máximos) o valles (mínimos) de la curva.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Floating Glossary Widget -->
+    <div class="glossary-widget" id="glossary-widget">
+        <button class="glossary-trigger-btn" id="glossary-trigger">
+            <i data-lucide="help-circle"></i>
+            <span>Glosario</span>
+        </button>
+        <div class="glossary-panel" id="glossary-panel">
+            <div class="glossary-header">
+                <h4><i data-lucide="book-open"></i> Definición de Variables</h4>
+                <button class="glossary-close-btn" id="glossary-close">&times;</button>
+            </div>
+            <div class="glossary-content">
+                <div class="glossary-item" id="glossary-term-u">
+                    <span class="glossary-symbol">$u$</span>
+                    <div class="glossary-desc">
+                        <strong>Función Principal o Argumento</strong>
+                        <p>El primer bloque en multiplicaciones, el término de arriba en fracciones, o "lo de adentro" en la regla de la cadena.</p>
+                    </div>
+                </div>
+                <div class="glossary-item" id="glossary-term-v">
+                    <span class="glossary-symbol">$v$</span>
+                    <div class="glossary-desc">
+                        <strong>Función Secundaria</strong>
+                        <p>El segundo bloque en multiplicaciones, o "el de abajo" en fracciones (el denominador).</p>
+                    </div>
+                </div>
+                <div class="glossary-item" id="glossary-term-prime">
+                    <span class="glossary-symbol">$u', v'$</span>
+                    <div class="glossary-desc">
+                        <strong>Derivadas de los Bloques</strong>
+                        <p>La derivada individual de $u$ o $v$ obtenida aplicando las reglas de derivación (Regla Maestra).</p>
+                    </div>
+                </div>
+                <div class="glossary-item" id="glossary-term-n">
+                    <span class="glossary-symbol">$n$</span>
+                    <div class="glossary-desc">
+                        <strong>Exponente o Potencia</strong>
+                        <p>La potencia a la que está elevada una variable o función externa (como el exponente en la regla de la cadena o potencia).</p>
+                    </div>
+                </div>
+                <div class="glossary-item" id="glossary-term-d">
+                    <span class="glossary-symbol">$\frac{d}{dx}$</span>
+                    <div class="glossary-desc">
+                        <strong>Operador de Derivación</strong>
+                        <p>Indica la instrucción de "derivar la siguiente expresión con respecto a $x$".</p>
+                    </div>
+                </div>
+                <div class="glossary-item" id="glossary-term-a">
+                    <span class="glossary-symbol">$a$</span>
+                    <div class="glossary-desc">
+                        <strong>Coeficiente Multiplicador</strong>
+                        <p>Un número constante que multiplica a una función (por ejemplo, el coeficiente en las trigonométricas: $a\,\text{sen}(u)$).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS and Auto-Render Extension -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <!-- Chart.js for interactive plotting -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons for clean symbols -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
