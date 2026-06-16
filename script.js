@@ -542,11 +542,10 @@ function initializeAnalyzer() {
     // Inspector & Tangent interaction - attached only once to canvas to avoid multiple listener conflicts
     const canvas = document.getElementById('function-canvas');
     if (canvas) {
-        canvas.addEventListener('mousemove', (e) => {
+        const handleInspection = (clientX) => {
             if (!chartInstance) return;
-            
             const rect = canvas.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
+            const offsetX = clientX - rect.left;
             
             const xArea = chartInstance.scales.x;
             const xVal = xArea.getValueForPixel(offsetX);
@@ -555,14 +554,37 @@ function initializeAnalyzer() {
                 updateInspectorValues(xVal, currentCoefs, currentDfCoefs);
                 drawTangentLine(xVal, currentCoefs, currentDfCoefs);
             }
+        };
+
+        canvas.addEventListener('mousemove', (e) => {
+            handleInspection(e.clientX);
         });
         
-        canvas.addEventListener('mouseleave', () => {
+        // Mobile touch support for inspect
+        canvas.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                e.preventDefault(); // Prevent standard page scroll while inspecting
+                handleInspection(e.touches[0].clientX);
+            }
+        }, { passive: false });
+        
+        canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+                handleInspection(e.touches[0].clientX);
+            }
+        }, { passive: true });
+        
+        // Hide tangent when cursor/finger leaves
+        const hideTangent = () => {
             if (chartInstance && chartInstance.data.datasets[1]) {
                 chartInstance.data.datasets[1].data = [];
                 chartInstance.update('none');
             }
-        });
+        };
+
+        canvas.addEventListener('mouseleave', hideTangent);
+        canvas.addEventListener('touchend', hideTangent);
+        canvas.addEventListener('touchcancel', hideTangent);
     }
 }
 
